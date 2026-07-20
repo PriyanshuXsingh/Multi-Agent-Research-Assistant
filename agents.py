@@ -1,5 +1,5 @@
 from langchain.agents import create_agent
-from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_groq import ChatGroq
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from tools import web_search, scrape_url
@@ -9,8 +9,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 #Model Setup
-llm = ChatGoogleGenerativeAI(
-    model="gemini-2.5-flash-lite",
+llm = ChatGroq(
+    model="llama-3.3-70b-versatile",
+    groq_api_key=os.getenv("GROQ_API_KEY"),
     temperature=0
 )
 
