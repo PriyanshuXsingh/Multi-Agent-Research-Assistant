@@ -3,7 +3,7 @@
 An AI-powered Multi-Agent Research Assistant that autonomously searches the web, extracts relevant information, generates structured research reports, and critiques its own output using multiple AI agents.
 
 Built using **LangChain**, **Groq Llama 3.3**, **Tavily Search API**, **BeautifulSoup**, and **Streamlit**.
- # Live - https://multi-agent-researchassi.streamlit.app/
+Live - https://multi-agent-researchassi.streamlit.app/
 ---
 
 ## 🚀 Features
