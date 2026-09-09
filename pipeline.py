@@ -13,7 +13,7 @@ def run_research_pipeline(topic: str) -> dict:
     search_result = search_agent.invoke({
         "messages" : [("user", f"Find recent, reliable and detailed information about: {topic}")]
     })
-    state["search_results"] = search_result['messages'][-1].content
+    state["search_results"] = search_result['messages'][-1].content[:3000]
     print("\n search result ",state['search_results'])
 
  #step 2 - reader agent 
@@ -41,8 +41,8 @@ def run_research_pipeline(topic: str) -> dict:
     print("="*50)
 
     research_combined = (
-        f"SEARCH RESULTS : \n {state['search_results']} \n\n"
-        f"DETAILED SCRAPED CONTENT : \n {state['scraped_content']}"
+        f"SEARCH RESULTS:\n{state['search_results'][:2500]}\n\n"
+        f"SCRAPED CONTENT:\n{state['scraped_content'][:4000]}"
     )
 
     state["report"] = writer_chain.invoke({
@@ -59,10 +59,14 @@ def run_research_pipeline(topic: str) -> dict:
     print("="*50)
 
     state["feedback"] = critic_chain.invoke({
-        "report":state['report']
+        "report":state['report'][:4000]
     })
 
-    print("\n critic report \n", state['feedback'])
+    print("\n========== CRITIC DEBUG ==========")
+    print("TYPE:", type(state["feedback"]))
+    print("RAW:", repr(state["feedback"]))
+    print("LENGTH:", len(state["feedback"]))
+    print("==================================")
 
     return state
 
